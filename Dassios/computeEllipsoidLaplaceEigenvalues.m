@@ -1,0 +1,1 @@
+function lambdaK = computeEllipsoidLaplaceEigenvalues(alpha)

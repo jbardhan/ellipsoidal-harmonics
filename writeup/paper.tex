@@ -1,0 +1,208 @@
+\section{Introduction}
+
+Our study originated with the boundary-integral analysis of the
+Coulomb-field approximation, which has been widely used~\cite{Luo97}
+
+Xue and Deng recently employed ellipsoidal harmonics for the
+three-dielectric electrostatics problem, providing a clear exposition
+and extensive analysis~\cite{Xue11}.
+
+Onufriev and Sigalov have conducted a series of studies to improve the
+Generalized Born model~\cite{Sigalov,Onufriev11}, and have established
+one method based on approximating the solute-solvent boundary as an
+ellipsoid~\cite{SigalovWhich}.
+
+
+\section{Ellipsoidal Coordinates and Harmonics}
+Following Dassios and Kariotou~\cite{Dassios03}, we define the
+ellipsoid via
+\begin{align}
+  \frac{x^2}{\alpha_x^2} +   \frac{y^2}{\alpha_y^2} +   \frac{z^2}{\alpha_z^2} = 1,
+  \end{align}
+assuming without loss of generality that $\alpha_x > \alpha_y >
+\alpha_z$.  We also define the semifocal distances
+\begin{align}
+  h_x &= \sqrt{\alpha_y^2-\alpha_z^2}\\
+  h_y &= \sqrt{\alpha_x^2-\alpha_z^2}\\
+  h_z &= \sqrt{\alpha_x^2-\alpha_y^2}.
+\end{align}
+We will also define $h_z = h$ and $h_y = k$.
+The ellipsoidal coordinate system $(\rho, \mu, \nu)$ and the Cartesian
+coordinates $(x, y, z)$ are related by
+\begin{align}\label{eq:cartesianSq}
+  x^2 &= \frac{\rho^2 \mu^2 \nu^2}{h^2_y h^2_z} \\
+  y^2 &= \frac{(\rho^2 - h^2_z)(\mu^2 - h^2_z)(h^2_z - \nu^2)}{h^2_x h^2_z} \\
+  z^2 &= \frac{(\rho^2 - h^2_y)(h^2_y - \mu^2)(h^2_y - \nu^2)}{h^2_x h^2_y}.
+\end{align}
+There is a sign ambiguity here, which can be resolved by appealing to the Lam\'e functions of first order. These are
+just the dipoles, and as such have the same sign as the traditional dipoles. Therefore, using $s_x = \mathrm{sgn}(x)$
+\begin{align}
+  s_x &= \mathrm{sgn}\left(H^0_1(\rho) H^0_1(\mu) H^0_1(\nu)\right) \\
+  s_y &= \mathrm{sgn}\left(H^1_1(\rho) H^1_1(\mu) H^1_1(\nu)\right) \\
+  s_z &= \mathrm{sgn}\left(H^2_1(\rho) H^2_1(\mu) H^2_1(\nu)\right),
+\end{align}
+however this just moves the sign ambiguity to the Lam\'e functions. We have, from Romain Table III or by taking square
+roots of Eq.~\ref{eq:cartesianSq},
+\begin{align}
+  h_y h_z x &= \rho \mu \nu \\
+  h_x h_z y &= \sqrt{\rho^2 - h^2_z} \sqrt{\mu^2 - h^2_z} \sqrt{h^2_z - \nu^2} \\
+  h_x h_y z &= \sqrt{\rho^2 - h^2_y} \sqrt{h^2_y - \mu^2} \sqrt{h^2_y - \nu^2},
+\end{align}
+where the sign of the square roots must be chosen consistently. We choose the sign of each square root as the product of
+the sign of argument and a sign determined by the semifocal axis. Thus we have
+\begin{align}\label{eq:sign}
+  s_x &= s_\rho s_\mu s_\nu \\
+  s_y &= (s_\rho s_{h_z}) (s_\mu s_{h_z}) (s_\nu s_{h_z}) = s_\rho s_\mu s_\nu s_{h_z} \\
+  s_z &= (s_\rho s_{h_y}) (s_\mu s_{h_y}) (s_\nu s_{h_y}) = s_\rho s_\mu s_\nu s_{h_y}.
+\end{align}
+Multiplying the first and second, and first and third equations,
+\begin{align}
+  s_x s_y &= s_{h_z} \\
+  s_x s_z &= s_{h_y}.
+\end{align}
+Now our system has the solution
+\begin{align}
+  s_\rho &= s_x s_y s_z \\
+  s_\mu  &= s_x s_y \\
+  s_\nu  &= s_x s_z,
+\end{align}
+which we can check using Eq.~\ref{eq:sign},
+\begin{align}\label{eq:sign}
+  s_x &= (s_x s_y s_z) (s_x s_y) (s_x s_z) \\
+  s_y &= s_x (s_x s_y) \\
+  s_z &= s_x (s_x s_z).
+\end{align}
+We use the sign assignment
+\begin{align}
+  s_\mu &= s_{h_z} \\
+  s_\nu &= s_{h_y}.
+\end{align}
+when computing the sign of $\psi^p_n$ used in the Lam\'e functions, and found in Romain Table II.
+
+Loosely speaking, the ellipsoidal coordinate $\rho$ is analogous to
+the radius in spherical coordinates, and $(\mu,\nu)$ are analogous to
+$(\theta, \phi)$, with the ellipsoid surface defined by $\rho =
+\alpha_1$, with $h_y^2 < \mu^2 < h_z^2$ and $0 < \nu^2 < h_z^2$.  We
+caution the reader that the analogy is more conceptual than practical.
+As a simple example, as the ellipsoid approaches a sphere
+($\alpha_x=\alpha_y=\alpha_z$) or spheroid ($\alpha_x=\alpha_y$ for a
+prolate spheroid and $\alpha_y=\alpha_z$ for an oblate spheroid), the
+semifocal distances approach zero; these limits necessitate more
+complicated analysis~\cite{Hobson31,Ritter,Dassios03}.  Hobson's text
+presents a detailed derivation of the coordinate system, using
+different notation~\cite{Hobson31}.
+
+The Laplace equation is separable in this coordinate system,
+remarkably each coordinate satisfies the Lame differential
+equation
+\begin{align}
+  \end{align}
+for $h_y < \rho < +\infty$ and the above ranges for $\mu$ and
+$\nu$~\cite{Darwin,Nevin,Hobson31,Dassios03}.  As for spherical
+harmonics, there exist $2n+1$ solutions for each degree $n$; defining
+$r=\frac{1}{2}n$ if $n$ is even and $r=\frac{1}{2}(n+1)$ if $n$ is
+odd, there are $r+1$ solutions labeled $K$, $n-r$ solutions labeled
+$L$, $n-r$ labeled $M$, and $r$ labeled $N$.  
+
+Unlike
+spherical harmonics, however, the ellipsoidal harmonics cannot be
+determined analytically beyond $n=3$, though they can be computed
+numerically~\cite{Ritter}.  Here we address only low-order surface
+ellipsoidal harmonics ($n=0,1,2$),
+\begin{align}
+H_0^1(\mu,\nu)&=K_0^1(\mu)K_0^1(\nu)&=1\\
+H_1^1(\mu,\nu)&=K_1^1(\mu)K_1^1(\nu)&=x\\
+H_1^2(\mu,\nu)&=L_1^1(\mu)L_1^1(\nu)&=y\\
+H_1^3(\mu,\nu)&=M_1^1(\mu)M_1^1(\nu)&=z
+  \end{align}
+
+Ritter showed that the ellipsoidal harmonics $H_n^m(\mu,\nu)$ are
+eigenfunctions of $\mathcal{K}$, with eigenvalues
+\begin{align}
+  \lambda_n^m =-1 + \frac{2 \alpha_x \alpha_y \alpha_z}{2 n + 1}K_n^m(\alpha_1)\left.\left(\frac{\partial}{\partial \rho}L_n^m(\rho)\right)\right|_{\alpha_1}.
+  \end{align}
+
+\section{Estimation of the Protein Ellipsoid}
+Sigalov \textit{et al.} have presented a method to estimate the shape
+of a solute molecule as an ellipsoid~\cite{Sigalov06}, which we use in
+this work as a simple and validated approach.  Briefly, the $N$ atoms
+are modeled as hard spheres, and the mass of the $i$th atom is defined
+as $m_i = a_i^3$ where $a_i$ is its radius.  The molecule is
+translated so its center of mass is the origin, and then rotated to
+diagonalize the inertia tensor defined by
+\begin{align}
+  \end{align}
+
+The ellipsoid semiaxes are then given by
+\begin{align}
+  \alpha_x &= \sqrt{\frac{5}{2M}(-I_{xx}+I_{yy}+I_{zz})}\\
+  \alpha_y &= \sqrt{\frac{5}{2M}(+I_{xx}-I_{yy}+I_{zz})}\\
+  \alpha_z &= \sqrt{\frac{5}{2M}(+I_{xx}+I_{yy}-I_{zz})}
+  \end{align}
+
+\section{Reduced Spectrum Approach}
+We start with the sphere problem, because the electric field operator
+$K$ is symmetric in this special case, so consequently its
+eigenvectors are orthogonal.  In other words, the eigendecomposition
+of $K = V \Lambda V^{-1}$ is also written $K = V \Lambda V^T$ where
+the $i$th column of $V$ is the $i$th eigenvector, associated with
+$\Lambda_{ii}= \lambda_i$ and $\Lambda$ is diagonal.  The exact
+solution to
+\begin{align}
+  \left(I + \hat{\epsilon}K\right) \sigma = x
+  \end{align}
+is
+\begin{align}
+\sigma = \sum_{i=1} \left(1+\hat{\epsilon}\lambda_i\right) v_i v_i^T x.
+  \end{align}
+The BIBEE/M and BIBEE/I approximations start from the trivial
+decomposition
+\begin{align}
+  x = v_1 v_1^T x + \left(I - v_1 v_1^T \right) x
+  \end{align}
+where $v_1$ is the (normalized) constant vector.  Then
+\begin{align}
+  (I -\hat{\epsilon}K) \sigma = x
+\end{align}
+can be approximated as
+\begin{align}
+  \hat{\sigma} = \left(1+\hat{\epsilon}(-\frac{1}{2})\right)^{-1} v_1 v_1^T x
+ + \left(1+\hat{\epsilon}\lambda^*\right)^{-1}\left(I- v_1 v_1^T \right) x
+  \end{align}
+where $\lambda^* = 0$ in BIBEE/M and takes a fitted value in BIBEE/I
+(see Figure 1).  The more general expression
+\begin{align}
+  x = v_1 v_1^T x + v_2 v_2^T x + \ldots + v_k v_k^T x + \left(I-
+  \begin{sbmatrix}{ccc}v_1 &\cdots&v_k\end{sbmatrix}
+  \begin{sbmatrix}{c}v_1^T\\\vdots\\v_k^T\end{sbmatrix}
+  \right)x
+  \end{align}
+leads to the approximate solution
+\begin{align}
+  \hat{\sigma} = & \sum_{i=1}^k \left(1+\hat{\epsilon}\lambda_i\right)^{-1} v_i v_i^T x \\
+  & + \left(1+\hat{\epsilon}\lambda^*\right)^{-1}\left(I-
+  \begin{sbmatrix}{ccc}v_1 &\cdots&v_k\end{sbmatrix}
+  \begin{sbmatrix}{c}v_1^T\\\vdots\\v_k^T\end{sbmatrix}
+  \right)x.
+  \end{align}
+For general surfaces $K$ is not symmetric, so it is not known whether
+the eigenvector matrix $V$ is orthogonal.  However, by writing
+\begin{align}
+K=  \begin{sbmatrix}{ccc}| & & |\\v_1 &\cdots&v_k\\ | & & | \end{sbmatrix}
+\begin{sbmatrix}{ccc}\lambda_1 & & \\ & \ddots & \\ & & \lambda_k \end{sbmatrix}
+  \begin{sbmatrix}{ccc} - & \tilde{v}_1 & -\\&\vdots&\\-&\tilde{v}_k&-\end{sbmatrix}
+\end{align}
+where $\tilde{v}_i$ denotes the $i$th row of $V^{-1}$, we may still write
+the exact solution as
+\begin{align}
+  \sigma = \sum \left(1+\hat{\epsilon}\lambda_i\right)^{-1} v_i \tilde{v}_i x
+  \end{align}
+The central approximation in this work is that we assume the
+eigenvectors are orthogonal with respect to the weighting function
+associated with the ellipsoidal harmonics~\cite{Dassios}.
+
+\section{Measuring the Effect of Eigenvector Approximation}
+
+If the molecular surface were actually ellipsoidal, then the
+projection approximation would be exact for the monopole and dipole
+modes of the integral operator modes.  However, the 

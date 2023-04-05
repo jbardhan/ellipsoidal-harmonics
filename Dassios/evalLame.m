@@ -1,0 +1,12 @@
+function lamevec = evalLame(x, order, ellipse)
+alpha = ellipse.alpha;
+lamevec = zeros(1,9);
+lamevec(1) = 1;
+lamevec(2) = x; %sqrt(abs(x^2-alpha(1)^2+alpha(1)^2));
+lamevec(3) = sqrt(abs(x^2-alpha(1)^2+alpha(2)^2));
+lamevec(4) = sqrt(abs(x^2-alpha(1)^2+alpha(3)^2));
+lamevec(5) = x^2 - alpha(1)^2 + ellipse.Lambda;
+lamevec(6) = x^2 - alpha(1)^2 + ellipse.LambdaPrime;
+lamevec(7) = prod(lamevec(2:4))/lamevec(2);
+lamevec(8) = prod(lamevec(2:4))/lamevec(3);
+lamevec(9) = prod(lamevec(2:4))/lamevec(4);

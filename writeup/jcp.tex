@@ -1,0 +1,261 @@
+\documentclass[preprint, letterpaper, nobibnotes, aps, superscriptaddress,endfloats*,prb]{revtex4-1}
+
+\input{preamble}
+
+\begin{document}
+
+\title{Mathematical Analysis of the BIBEE Approximation for Molecular Solvation: Exact Results for Spherical Inclusions}
+\author{Jaydeep P. Bardhan}
+\affiliation{Dept. of Molecular Biophysics and Physiology, Rush University Medical Center, Chicago IL 60612}
+\author{Matthew G. Knepley}
+\affiliation{Computation Institute, The University of Chicago, Chicago IL 60637}
+\input{abstract}
+
+\maketitle
+
+%\thanks{Put in grant numbers}
+
+\input{paper}
+
+\bibliographystyle{unsrt}
+\bibliography{paper}
+
+\end{document}
+
+The spherical harmonic analysis suggested a simple ansatz that
+possessed significantly better accuracy than either of the BIBEE
+models, but could not be resolved as a simple modified boundary
+condition as can the others.  As a result, the simple ansatz cannot
+readily be implemented outside the sphere problem, which is
+discouraging.  This result seemed at first to contradict the
+separability condition, but closer inspection reveals that it odes
+not, for the following reason.  The designed ansatz relates the
+fixed-charge Coulomb potential to the reaction-field potential at the
+surface; however, the BIBEE separation of variables occurs in the
+determination of the approximate surface charge distribution.  The
+estimation of electrostatic free energies using separable
+approximations has been highlighted very recently as a way to
+incorporate dielectric effects into classical density functional
+theory (DFT)~\cite{Gillespie}; thus, the separability approach to
+analyzing electrostatic models may have broader applications than the
+one described here.
+
+
+\section{Comparison to the GB$\epsilon$ Model}\label{sec:GBeps}
+
+
+\subsection{The Electrostatic Radius As A Spherical Capacitance Problem}\label{sec:capacitance}
+The GB$\epsilon$ model computes the ``electrostatic radius'' of a
+molecule by employing the Born expression for the self-energy of one
+point charge in the molecule as $\beta \to \infty$.  In introducing
+the method, Sigalov \textit{et al.} discuss several aspects of the
+physical significance of this parameter, including the fact that all
+of the charges' self-energies approach the same value in this
+limit~\cite{Sigalov05}.  Although the authors do note that this limit
+corresponds to the solute becoming a conductor, apparently one
+relationship that has not been discussed is that the electrostatic
+radius may be interpreted as an \textit{equivalent spherical
+  capacitor}.  Consequently, methods for calculating capacitance may
+be valuable for GB$\epsilon$ understanding and implementation.
+
+A linear capacitor is defined by the relation $Q = C V$, where $Q$ is
+the net charge on the conductor surface, $C$ is the capacitance, and
+$V$ is the potential of the conductor relative to ground; the energy
+stored in such a configuration is $E = \frac{1}{2} Q^2/C$.  Because
+the electric field must be zero inside a conductor, the potential
+everywhere inside must be constant, including at the boundary
+$\Omega$.  Furthermore, as Sigalov \textit{et al.}  discussed, the
+total amount of surface charge is exactly equal in magnitude and
+opposite in sign to the net charge $\int_{V_1} \rho(\vr) dV$.  We may
+therefore use the following scheme to calculate the self-energy of a
++1$e$ point charge, where $e$ is the electron charge $1.6\times
+10^{-19}$ Coulombs.  First, one assumes that the molecule has no
+charges inside it, so that the Laplace equation holds in both $V_1$
+and $V_2$. second, set the potential at $\Omega$ to be $1$ Volt and
+compute the equivalent capacitance $C$ of the molecule.  Finally, one
+calculates $\frac{1}{2} e^2/C$.  It is well-known that the capacitance
+problem can be solved using the first-kind Fredholm boundary integral
+equation
+\begin{equation}
+  \varphi(\vr) = \int_\Omega \sigma(\vrp) \cdot \frac{1}{4\pi ||\vr-\vrp||} d^2\vrp 
+\end{equation}
+where $\varphi(\vr)$ is the potential at the conductor surface and again
+$\sigma(\vr)$ is the induced charge density.  
+
+We have demonstrated this relationship using the residue glutamate
+with neutral capping groups, built using the software
+VMD~\cite{Humphrey96} and the CHARMM force field~\cite{MacKerell98}.
+Plotted in Figure~\ref{fig:radius-as-capacitance} are the relative RMS
+deviations of the point charges' self-energies compared to the energy
+stored in the ``capacitor'' molecule when a total of $-1 e$ charge
+is situated on its surface.
+\begin{figure}[ht!]
+\centering
+\resizebox{3.0in}{!}{\includegraphics{figures/glutamate-capacitance.eps}}
+\caption{Illustration of the relationship between the capacitance
+  problem and a solute's electrostatic radius in the GB$\epsilon$
+  model, using the residue glutamate with neutral capping groups.
+  Plotted as a function of the dielectric ratio
+  $\beta=\epsilon_1/\epsilon_2$ are the relative deviations between
+  the ``perfect'' self-energies for $+1e$ charges (calculated using
+  boundary-element methods) and the energy stored in a capacitor of
+  the same shape when the total surface charge is equal to $-1 e$.  In
+  these calculations, $\epsilon_2 = 80$ always and $\epsilon_1$ varies
+  from 2 to $10^5$.}\protect\label{fig:radius-as-capacitance}
+\end{figure}
+
+\subsection{Dependence of BIBEE Accuracy on Dielectric Constants}
+% analytical results: BIBEE sucks when charges are in high dielectric
+% numerical results: 
+
+\subsection{Effective Dielectric Constants}
+% overscreening: +/- surface charges, vary the theta between them
+%    exact; GB/CFA; GBeps; BIBEE
+% sphere with spherical cavity: note that 
+
+\subsection{Preservation of Reaction-Potential Operator Eigenvectors}
+% why are eigenvectors important
+% we have shown that BIBEE eigenvectors are exact for the sphere
+% how are GBeps eigenvectors for sphere?
+% how are GBeps eigenvectors for peptide (choose antimicrobial?)
+
+\section{Discussion}
+% effective dielectric constants
+\begin{enumerate}
+\item Overscreening (dangerous word because it shows up elsewhere
+  meaning other things, we propose the alternative X)
+  \end{enumerate}
+
+% Capacitance
+\begin{enumerate}
+\item The problem of rapidly estimating capacitances has received
+  extensive treatment due to its practical importance in the design
+  of integrated circuits~\cite{foo}.
+\item Fast methods for solving these integral equations are among the
+  first applications of fast BEM methods
+\item Because the convergence of an iterative method such as GMRES is
+  rapid for these problems, one may be able to efficiently maintain a
+  highly accurate estimate of the molecule's e-s radius (show that
+  it's important with an example), i.e. not fully solving the
+  capacitance problem but estimating it by a few iterations ie low
+  tolerance solve.
+\item Tree codes and FMM may all be used, cite Onufriev other paper,
+ since implementations suitable already exist, these should be
+readily integrated with no heuristics necessary.
+\item Point out Sigalov06 problems with capacitance estimation heuristics
+  that they introduced, but do so nicely.
+\item We have not run the finite-difference calculations reported by
+  Sigalov05 but note that the challenges of high accuracy capacitance
+  calculations motivated the development of boundary-integral methods
+  for their computation (old papers, ask Jacob).  The large errors
+  reported in the GBeps paper may result from the same errors--it
+  becomes essentially an exterior problem.
+\end{enumerate}
+
+% dielectric constant dependence
+\begin{enumerate}
+\item We have found that the BIBEE methods do not exhibit nearly the
+  accuracy that GB$\epsilon$ does while varying the dielectric
+  constants.  
+\item This result was anticipated given two facts.  First, the
+  polarization free energy changes from being negative in sign
+  (i.e. favorable transfer out of a uniform medium of dielectric
+  constant $\epsilon_1$ and into one with $\epsilon_2$) to a positive
+  quantity if $\epsilon_1 > \epsilon_2$.  Second, BIBEE/P and
+  BIBEE/CFA make complementary assumptions about the important
+  eigenmodes and one keeps the constant field, one keeps the highly
+  varying fields.  The importance of these two components switches
+  place as $\beta$ goes from zero to infinity (check).
+\item Eigenvectors are still well preserved, which is in keeping with
+  our earlier analysis (cite paper) for a sphere that the BIBEE
+  eigenvectors are exact; that analysis did not rest on the particular
+  dielectric constants.  However, the eigenvectors are also very good
+  even when the estimated energies are highly inaccurate.
+\item Noteworthy that the eigenvectors of BIBEE reaction-potential
+  operator are invariant with respect to dielectric constant (check):
+  are the eigenvectors of the actual problem?  more analysis is
+  needed.
+\item We are working to develop a dielectric-dependent BIBEE given our
+  emphasis on general approximation schemes, and motivated by the
+  success of the GB$\epsilon$ model.  However, for protein problems
+  this should not be a big deal.
+\end{enumerate}
+
+% general
+\begin{enumerate}
+\item We are approximating the induced surface charge, whereas the
+  basis for GB is the approximation of the reaction field potential
+  directly.
+\item The latter might be argued to be the easier approximation to
+  make, since it is smoother (it is the Coulomb convolution integral
+  over the induced charge, one degree smoother mathematically)
+\item We have made some progress but clearly there is still a long way
+  to go.  BIBEE is not currently as accurate as modern GB approaches.
+\item The mathematical basis for the BIBEE approach is strong,
+  however, and we are continuing to explore how the extensive
+  analytical efforts on GB may be leveraged in a mathematically
+  general approximate electrostatic model.
+\item Our strategy also benefits from a century of mathematical
+  analysis of the boundary integral operator that BIBEE
+  approximates~\cite{Plemelj11,Ahner86,Ahner94,Ahner94_2,Martensen99}.
+\item Specifically, it is known that the sum of its eigenvalues are an
+  invariant for a sphere, spheroid, or ellipsoid, a property that may
+  well explain the remarkable accuracy of the $\alpha$ parameter in
+  the GB$\epsilon$ model for a wide range of realistic problems, when
+  it has only been parameterized for the sphere.
+\end{enumerate}
+
+We also obtain an explanation for BIBEE's excellent preservation of
+the reaction-potential matrix eigenvectors: for the spherical cavity,
+the BIBEE approximation exactly preserves the eigenfunctions of the
+actual reaction-potential operator.  Further analysis will be required
+to determine whether this rigorous result holds also for nontrivial
+geometries, but the present finding at least provides a theoretical
+justification for the remarkable behavior of the BIBEE approximation,
+and earlier results on peptides (i.e. nonspherical solutes) illustrate
+its quality for problems that do not yet have as strong a theoretical
+understanding~\cite{Bardhan08_BIBEE}.  Finally, our analysis
+illustrates the BIBEE models can be interpreted as Poisson problems
+with modified boundary conditions, and offers a simple mathematical
+model to explain why the BIBEE/CFA and BIBEE/P variants exhibit
+complementary accuracy for charge distributions that generate smoothly
+or rapidly varying normal electric fields.
+
+
+The BIBEE algorithm should be contrasted with the surface-charge
+generalized Born (SCGB) model of Fedichev et
+al.~\cite{Fedichev09,Fedichev09_2}.  In that approach, one finds
+effective Born radii using either the CFA or other methods, and then
+similar to BIBEE computes an approximate induced surface charge by
+assuming that the surface charge density at a point ${\bf r}$ on the
+surface is proportional to the normal electric field there.  However,
+unlike BIBEE, the authors scale each point charge's contribution to
+the surface charge density by the charge's Born radius.  A more
+detailed analysis of this approach is outside the scope of this work;
+however, as the authors note, their approach generates the exact
+solution for a sphere.
+
+
+% general
+\begin{enumerate}
+\item We are approximating the induced surface charge, whereas the
+  basis for GB is the approximation of the reaction field potential
+  directly.
+\item The latter might be argued to be the easier approximation to
+  make, since it is smoother (it is the Coulomb convolution integral
+  over the induced charge, one degree smoother mathematically)
+\item We have made some progress but clearly there is still a long way
+  to go.  BIBEE is not currently as accurate as modern GB approaches.
+\item The mathematical basis for the BIBEE approach is strong,
+  however, and we are continuing to explore how the extensive
+  analytical efforts on GB may be leveraged in a mathematically
+  general approximate electrostatic model.
+\item Our strategy also benefits from a century of mathematical
+  analysis of the boundary integral operator that BIBEE
+  approximates~\cite{Plemelj11,Ahner86,Ahner94,Ahner94_2,Martensen99}.
+\item Specifically, it is known that the sum of its eigenvalues are an
+  invariant for a sphere, spheroid, or ellipsoid, a property that may
+  well explain the remarkable accuracy of the $\alpha$ parameter in
+  the GB$\epsilon$ model for a wide range of realistic problems, when
+  it has only been parameterized for the sphere.
+\end{enumerate}

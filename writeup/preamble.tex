@@ -1,0 +1,59 @@
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{url}
+\usepackage{graphicx}        % standard LaTeX graphics tool
+                             % when including figure files
+%\usepackage{minted}
+
+% Comments package
+
+
+\def\vf{{\bf f}}
+\def\vrp{{\bf r}'}
+\def\vr{{\bf r}}
+\def\vu{{\bf u}}
+\def\vv{{\bf v}}
+\def\vx{{\bf x}}
+\def\vn{{\bf n}}
+\def\code#1{{\tt #1}}
+\def\enum#1{{\sc #1}}
+\def\class#1{{\tt\bf #1}}
+\def\function#1{\code{#1}}
+
+% Color macros
+\newcommand{\blue}{\textcolor{blue}}
+\newcommand{\green}{\textcolor{green}}
+\newcommand{\red}{\textcolor{red}}
+\newcommand{\brown}{\textcolor{brown}}
+\newcommand{\cyan}{\textcolor{cyan}}
+\newcommand{\magenta}{\textcolor{magenta}}
+\newcommand{\yellow}{\textcolor{yellow}}
+
+% Author notes
+%\usepackage[colorinlistoftodos, textwidth=4cm, shadow]{todonotes}
+%\newcommand{\note}[1]{\todo[color=orange!40,inline]{{\bf Note:} #1}}
+%\newcommand{\jay}[1]{\todo[color=blue!40,inline]{{\bf Jay:} #1}}
+%\newcommand{\matt}[1]{\todo[color=green!40,inline]{{\bf Matt:} #1}}
+%\newcommand{\fixme}[1]{\todo[color=red!40,inline]{{\bf FIXME:} #1}}
+% \newcommand{\note}[1]{}
+% \newcommand{\andy}[1]{}
+% \newcommand{\matt}[1]{}
+% \newcommand{\fixme}[1]{}
+\let\comment = \note
+
+\newcommand{\arxiv}{\let\arxivFig\matt}
+
+\def\Xint#1{\mathchoice
+   {\XXint\displaystyle\textstyle{#1}}%
+   {\XXint\textstyle\scriptstyle{#1}}%
+   {\XXint\scriptstyle\scriptscriptstyle{#1}}%
+   {\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+   \!\int}
+\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$}
+     \vcenter{\hbox{$#2#3$}}\kern-.5\wd0}}
+\def\ddashint{\Xint=}
+\def\dashint{\Xint-}
+\newenvironment{sbmatrix}[1]{\left[ \begin{array}{#1}}%
+	{\end{array} \right]}
